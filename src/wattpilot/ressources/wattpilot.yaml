@@ -1147,12 +1147,6 @@ properties:
     description: State of charge of the PV battery
     jsonType: float
     example: 72.5
-    homeAssistant:
-      component: sensor
-      config:
-        device_class: battery
-        unit_of_measurement: "%"
-        value_template: "{{ value | float | round(1) }}"
   - key: fbuf_ohmpilotState
     alias: ohmpilotState
     title: Ohmpilot State
@@ -1174,34 +1168,18 @@ properties:
     description: Power that is consumed from the PV battery (or delivered into the battery, if negative)
     jsonType: float
     example: -3985.899
-    homeAssistant:
-      component: sensor
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: fbuf_pGrid
     alias: powerGrid
     title: Power Grid
     description: Power consumed from grid (or delivered to grid, if negative)
     jsonType: integer
     example: 11
-    homeAssistant:
-      component: sensor
-      config:
-        device_class: power
-        unit_of_measurement: W
-        value_template: "{{ value | float | round(2) }}"
   - key: fbuf_pPv
     alias: powerPv
     title: Power PV
     description: PV power that is produced
     jsonType: float
     example: 4701.407
-    homeAssistant:
-      component: sensor
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: fcc
     jsonType: boolean
     example: true
@@ -2039,94 +2017,6 @@ properties:
       config:
         enabled_by_default: true
     childProps:
-      - key: nrg_ul1
-        title: Charging Voltage L1
-        valueRef: 0
-        homeAssistant:
-          config:
-            device_class: voltage
-            unit_of_measurement: V
-            enabled_by_default: false
-      - key: nrg_ul2
-        title: Charging Voltage L2
-        valueRef: 1
-        homeAssistant:
-          config:
-            device_class: voltage
-            unit_of_measurement: V
-            enabled_by_default: false
-      - key: nrg_ul3
-        title: Charging Voltage L3
-        valueRef: 2
-        homeAssistant:
-          config:
-            device_class: voltage
-            unit_of_measurement: V
-            enabled_by_default: false
-      - key: nrg_un
-        title: Charging Voltage N
-        valueRef: 3
-        homeAssistant:
-          config:
-            device_class: voltage
-            unit_of_measurement: V
-            enabled_by_default: false
-      - key: nrg_il1
-        title: Charging Current L1
-        valueRef: 4
-        homeAssistant:
-          config:
-            device_class: current
-            unit_of_measurement: A
-            enabled_by_default: false
-      - key: nrg_il2
-        title: Charging Current L2
-        valueRef: 5
-        homeAssistant:
-          config:
-            device_class: current
-            unit_of_measurement: A
-            enabled_by_default: false
-      - key: nrg_il3
-        title: Charging Current L3
-        valueRef: 6
-        homeAssistant:
-          config:
-            device_class: current
-            unit_of_measurement: A
-            enabled_by_default: false
-      - key: nrg_pl1
-        title: Charging Power L1
-        valueRef: 7
-        homeAssistant:
-          config:
-            device_class: power
-            unit_of_measurement: W
-            enabled_by_default: false
-      - key: nrg_pl2
-        title: Charging Power L2
-        valueRef: 8
-        homeAssistant:
-          config:
-            device_class: power
-            unit_of_measurement: W
-            enabled_by_default: false
-      - key: nrg_pl3
-        title: Charging Power L3
-        valueRef: 9
-        homeAssistant:
-          config:
-            device_class: power
-            unit_of_measurement: W
-            enabled_by_default: false
-      - key: nrg_pn
-        title: Charging Power N
-        valueRef: 10
-        homeAssistant:
-          config:
-            device_class: power
-            unit_of_measurement: W
-            enabled_by_default: false
       - key: nrg_ptotal
         title: Charging Power Total
         valueRef: 11
@@ -2135,38 +2025,6 @@ properties:
             device_class: power
             unit_of_measurement: W
             enabled_by_default: true
-      - key: nrg_pfl1
-        title: Charging Power Factor L1
-        valueRef: 12
-        homeAssistant:
-          config:
-            device_class: power_factor
-            unit_of_measurement: "%"
-            enabled_by_default: false
-      - key: nrg_pfl2
-        title: Charging Power Factor L2
-        valueRef: 13
-        homeAssistant:
-          config:
-            device_class: power_factor
-            unit_of_measurement: "%"
-            enabled_by_default: false
-      - key: nrg_pfl3
-        title: Charging Power Factor L3
-        valueRef: 14
-        homeAssistant:
-          config:
-            device_class: power_factor
-            unit_of_measurement: "%"
-            enabled_by_default: false
-      - key: nrg_pfn
-        title: Charging Power Factor N
-        valueRef: 15
-        homeAssistant:
-          config:
-            device_class: power_factor
-            unit_of_measurement: "%"
-            enabled_by_default: false
   - key: nvs
     jsonType: object
     example:
@@ -2370,6 +2228,7 @@ properties:
     type: optional<array>
     category: Status
     description: phases
+    homeAssistant:
   - key: pnp
     alias: numberOfPhases
     title: Number of Phases
@@ -2379,6 +2238,7 @@ properties:
     type: uint8
     category: Status
     description: numberOfPhases
+    homeAssistant:
   - key: po
     alias: prioOffset
     title: Prio Offset
@@ -2447,10 +2307,6 @@ properties:
     type: float
     category: Status
     description: averagePAkku
-    homeAssistant:
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: pvopt_averagePGrid
     alias: averagePGrid
     title: Average Power Grid
@@ -2460,20 +2316,12 @@ properties:
     type: float
     category: Status
     description: averagePGrid
-    homeAssistant:
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: pvopt_averagePOhmpilot
     alias: avgPowerOhmpilot
     title: Average Power Ohmpilot
     jsonType: integer
     example: 0
     rw: R
-    homeAssistant:
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: pvopt_averagePPv
     alias: averagePPv
     title: Average Power PV
@@ -2483,30 +2331,18 @@ properties:
     type: float
     category: Status
     description: averagePPv
-    homeAssistant:
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: pvopt_deltaA
     alias: deltaCurrent
     title: Delta Current
     jsonType: integer
     example: 0
     rw: R
-    homeAssistant:
-      config:
-        device_class: current
-        unit_of_measurement: A
   - key: pvopt_deltaP
     alias: deltaPower
     title: Delta Power
     jsonType: float
     example: -1256.149
     rw: R
-    homeAssistant:
-      config:
-        device_class: power
-        unit_of_measurement: W
   - key: pvopt_specialCase
     alias: pvOptSpecialCase
     title: PVOpt Special Case

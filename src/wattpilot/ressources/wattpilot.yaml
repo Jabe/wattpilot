@@ -311,6 +311,7 @@ properties:
         device_class: current
         options:
           - "6"
+          - "8"
           - "10"
           - "12"
           - "16"
